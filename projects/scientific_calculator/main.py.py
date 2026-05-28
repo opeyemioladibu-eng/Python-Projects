@@ -32,10 +32,23 @@ def divide (a, b):
 #history list
 history = []
 
-
+#save history to history.txt
+def save_history(entry):
+    with open("history.txt", "a") as f:
+        f.write(entry + "\n")
+        
+try:
+    with open("history.txt", "r") as f:
+            history = f.read().splitlines()
+except FileNotFoundError:
+        history = []
+        
+        
 #start of while(continuous) loop
 while True:
     try:
+        
+            
         user_input = (input("\nEnter Operation[0/1/2/3/4/5/6/7/8/9/10/11]:"))
         
         
@@ -51,19 +64,27 @@ while True:
                 else:
                     results = math.sqrt(num1)
                     print(f"Result: {results}")
-                    history.append(f"Square root:{num1} = {results}")
+                    entry = f"Square root: {num1} = {results}"
+                    history.append(entry)
+                    save_history(entry)
             elif user_input == "6":
                 results = math.sin(math.radians(num1))
                 print(f"Result: {results}")
-                history.append(f"Sine:{num1} = {results}")
+                entry = f"Sine: {num1} = {results}"
+                history.append(entry)
+                save_history(entry)
             elif user_input == "7":
                 results = math.cos(math.radians(num1))
                 print(f"Result: {results}")
-                history.append(f"Cosine:{num1} = {results}")
+                entry = f"Cosine: {num1} = {results}"
+                history.append(entry)
+                save_history(entry)
             elif user_input == "8":
                 results = math.tan(math.radians(num1))
                 print(f"Result: {results}")
-                history.append (f"Tangent:{num1} = {results}")
+                entry = f"Tangent: {num1}= {results}"
+                history.append(entry)
+                save_history(entry)
         
         
         
@@ -82,6 +103,7 @@ while True:
                 continue
             elif user_input == "10":
                 history.clear()
+                open("history.txt", "w").close()
                 print("History cleared.")
                 continue
             elif user_input == "11":
@@ -95,21 +117,29 @@ while True:
             if user_input == "1":
                 results = add(num1, num2)
                 print(f"Result:{results}")
-                history.append(f"{num1} + {num2} = {results}")
+                entry = f"{num1} + {num2} = {results}"
+                history.append(entry)
+                save_history(entry)
             elif user_input == "2":
                 results = subtract(num1, num2)
                 print(f"Result:{results}")
-                history.append(f"{num1} - {num2} = {results}")
+                entry = f"{num1} - {num2} = {results}"
+                history.append(entry)
+                save_history(entry)
             elif user_input == "3":
                 results = multiply(num1, num2)
                 print(f"Result:{results}")
-                history.append(f"{num1} * {num2} = {results}")
+                entry = f"{num1} * {num2} = {results}"
+                history.append(entry)
+                save_history(entry)
             elif user_input == "4":
                 if num2 == 0:
                     raise ZeroDivisionError
                 results = divide(num1, num2)
                 print(f"Result:{results}")
-        
+                entry = f"{num1} / {num2} = {results}"
+                history.append(entry)
+                save_history(entry)
             
     except ValueError:
         print("Enter Valid Number.")
